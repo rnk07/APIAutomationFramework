@@ -1,9 +1,12 @@
 package com.api.test;
 
+import java.io.IOException;
+
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 import com.api.pojo.UserCredentials;
+import com.api.utils.ConfigManager2;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -12,13 +15,14 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 public class LoginAPITest {
 	
 	@Test
-	public void loginAPITest(){
+	public void loginAPITest() throws IOException{
 		
 		UserCredentials userCredentials = new UserCredentials("iamfd", "password");
+
 		
 	RestAssured
 	.given()
-		.baseUri("http://64.227.160.186:9000/v1")
+		.baseUri(ConfigManager2.getProperty("BASE_URI")) //Use of utils method
 		.and()
 		.contentType(ContentType.JSON)
 		.and()
