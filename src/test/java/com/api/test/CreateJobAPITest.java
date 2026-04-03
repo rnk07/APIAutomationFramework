@@ -9,7 +9,14 @@ import java.util.List;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
+import com.api.constant.Model;
+import com.api.constant.OEM;
+import com.api.constant.Platform_Id;
+import com.api.constant.Problem;
+import com.api.constant.Product;
 import com.api.constant.Roles;
+import com.api.constant.Service_Location;
+import com.api.constant.Warranty_Status;
 import com.api.request.model.CreateJobPOJO;
 import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
@@ -31,13 +38,13 @@ public class CreateJobAPITest {
 		
 		Customer customer = new Customer("Ronak", "Test", "123456789", "", "ronak@test.com", "");
 		CustomerAddress customerAddress = new CustomerAddress("5 ", "John Street", "Gandhi Bag", "Inrobit", "Mumbai", "395005","India","Pune");
-		CustomerProduct customerProduct = new CustomerProduct(DateTimeUtil.getTimeWithDaysAgo(10), "15669059666577", "15669059666577", "15669059666577", DateTimeUtil.getTimeWithDaysAgo(10), 1, 1);
+		CustomerProduct customerProduct = new CustomerProduct(DateTimeUtil.getTimeWithDaysAgo(10), "99669059666577", "99669059666577", "99669059666577", DateTimeUtil.getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(), Model.NEXUS_2_BLUE.getCode());
 		
-		Problems problems = new Problems(1, "Charger Issue");
+		Problems problems = new Problems(Problem.SMARTPHONE_IS_RUNNING_SLOW.getCode(), "Charger Issue");
 		List<Problems>  problemsList = new ArrayList<Problems>();
 		problemsList.add(problems) ;
 		
-		CreateJobPOJO createJobPayload = new CreateJobPOJO(0, 2, 1, 1, customer, customerAddress, customerProduct, problemsList);
+		CreateJobPOJO createJobPayload = new CreateJobPOJO(Service_Location.SERVICE_LOCATION_A.getCode(), Platform_Id.FRONT_DESK.getCode(), Warranty_Status.IN_WARRANTY.getCode(), OEM.GOOGLE.getCode(), customer, customerAddress, customerProduct, problemsList);
 		
 		
 		
