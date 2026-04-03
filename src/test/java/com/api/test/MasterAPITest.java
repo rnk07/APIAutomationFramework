@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.api.constant.Roles;
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager2;
+import com.api.utils.SpecUtil;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -18,21 +19,12 @@ public class MasterAPITest {
 		
 		RestAssured
 			.given()
-				.baseUri(ConfigManager2.getProperty("BASE_URI"))
-				.and()
-				.contentType(ContentType.TEXT)
-				.and()
-				.header("Authorization",AuthTokenProvider.getToken(Roles.FD))
-				.and()
-				.log().uri()
-				.log().method()
-				.log().headers()
+				.spec(SpecUtil.requestSpec())
+				.spec(SpecUtil.requestSpecWithAuth(Roles.FD))
 			.when()
 				.post("master")
 			.then()
-				.log().all()
-				.statusCode(200)
-				.time(Matchers.lessThan(4000L))
+				.spec(SpecUtil.responseSpec_OK())
 				.body("message", Matchers.matchesPattern("Success"))
 				.body("data", Matchers.notNullValue())
 				.body("$", Matchers.hasKey("message"))
@@ -47,20 +39,11 @@ public class MasterAPITest {
 	public void invalidTokenMasterAPITest() {
 		RestAssured
 		.given()
-			.baseUri(ConfigManager2.getProperty("BASE_URI"))
-			.and()
-			.contentType(ContentType.TEXT)
-			.and()
-			.header("Authorization","")
-			.and()
-			.log().uri()
-			.log().method()
-			.log().headers()
+			.spec(SpecUtil.requestSpec())
 		.when()
 			.post("master")
 		.then()
-			.log().all()
-			.statusCode(401);
+			.spec(SpecUtil.responseSpec_TEXT(401));
 	}
 	
 	
