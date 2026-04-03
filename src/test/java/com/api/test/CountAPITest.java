@@ -13,7 +13,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class CountAPITest {
 
-	@Test
+	@Test(description = "Verify if Count Job API is working fine.",groups = {"somke","sanity","apiRegression"})
 	public void verfyCountAPIResonse() {
 		
 		RestAssured
@@ -35,7 +35,7 @@ public class CountAPITest {
 
 	}
 	
-	@Test
+	@Test(description = "Verify if Create Job API is givine 401 error for invalid token.",groups = {"somke","apiNegative","apiRegression"})
 	public void countAPITest_MissingAuthToken() {
 		RestAssured
 		.given()

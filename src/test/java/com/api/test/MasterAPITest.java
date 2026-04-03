@@ -14,7 +14,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class MasterAPITest {
 
-	@Test
+	@Test(description = "Verify if Master API is working fine.",groups = {"smoke","sanity","apiRegression"})
 	public void masterAPITest() {
 		
 		RestAssured
@@ -35,7 +35,7 @@ public class MasterAPITest {
 				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("responseSchema/masterAPIResponseSchema-FD.json"));
 	}
 	
-	@Test
+	@Test(description = "Verify if Master API gives 401 error for invalid token.",groups = {"smoke","apiNegative","apiRegression"})
 	public void invalidTokenMasterAPITest() {
 		RestAssured
 		.given()
