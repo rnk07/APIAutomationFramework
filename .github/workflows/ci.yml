@@ -3,10 +3,22 @@ name: API Test Automation Workflow
 
 on:
   workflow_dispatch:
+    inputs:
+      env:
+        description: "Environment"
+        type: choice
+        options:
+          - qa
+          - dev
+          - uat
+        default: qa
+        required: true
   push:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  schedule: 
+    - cron: "00 02 * * 4"
 
 jobs:
   test:
@@ -22,7 +34,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Execution Test Automation Framework
-      run: mvn test -DsuiteXmlFile=testng.xml -Denv=qa
+      run: mvn test -DsuiteXmlFile=testng.xml -Denv="${{ github.event.inputs.env }}"
 
     - name: Upload a Build Artifact
       if: always()
