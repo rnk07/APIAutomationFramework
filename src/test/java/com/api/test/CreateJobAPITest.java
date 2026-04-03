@@ -1,5 +1,8 @@
 package com.api.test;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,11 +10,12 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 import com.api.constant.Roles;
-import com.api.pojo.CreateJobPOJO;
-import com.api.pojo.Customer;
-import com.api.pojo.CustomerAddress;
-import com.api.pojo.CustomerProduct;
-import com.api.pojo.Problems;
+import com.api.request.model.CreateJobPOJO;
+import com.api.request.model.Customer;
+import com.api.request.model.CustomerAddress;
+import com.api.request.model.CustomerProduct;
+import com.api.request.model.Problems;
+import com.api.utils.DateTimeUtil;
 import com.api.utils.SpecUtil;
 
 import io.restassured.RestAssured;
@@ -27,7 +31,7 @@ public class CreateJobAPITest {
 		
 		Customer customer = new Customer("Ronak", "Test", "123456789", "", "ronak@test.com", "");
 		CustomerAddress customerAddress = new CustomerAddress("5 ", "John Street", "Gandhi Bag", "Inrobit", "Mumbai", "395005","India","Pune");
-		CustomerProduct customerProduct = new CustomerProduct("2026-03-25T04:00:00.000Z", "15669059666577", "15669059666577", "15669059666577", "2026-03-25T04:00:00.000Z", 1, 1);
+		CustomerProduct customerProduct = new CustomerProduct(DateTimeUtil.getTimeWithDaysAgo(10), "15669059666577", "15669059666577", "15669059666577", DateTimeUtil.getTimeWithDaysAgo(10), 1, 1);
 		
 		Problems problems = new Problems(1, "Charger Issue");
 		List<Problems>  problemsList = new ArrayList<Problems>();
