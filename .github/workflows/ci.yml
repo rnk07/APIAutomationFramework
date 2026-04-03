@@ -26,7 +26,7 @@ on:
   pull_request:
     branches: [ "master" ]
   schedule: 
-    - cron: "00 02 * * 4"
+    - cron: "00 02 * * 3"
 
 jobs:
   test:
