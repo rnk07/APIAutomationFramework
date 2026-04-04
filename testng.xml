@@ -9,6 +9,7 @@
       <class name="com.api.test.UserDetailAPITest"/>
       <class name="com.api.test.CountAPITest"/>
       <class name="com.api.test.MasterAPITest"/>
+      <class name="com.api.test.CreateJobAPITest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
