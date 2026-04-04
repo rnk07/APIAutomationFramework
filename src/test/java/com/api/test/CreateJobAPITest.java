@@ -32,7 +32,6 @@ public class CreateJobAPITest {
 	private List<Problems>  problemsList;
 	private CreateJobPOJO createJobPayload;
 	
-	
 	@BeforeMethod
 	public void setUp() {
 		
