@@ -1,5 +1,11 @@
 package com.api.utils;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import javax.management.relation.Role;
+
 import org.hamcrest.Matchers;
 
 import com.api.constant.Roles;
@@ -14,7 +20,15 @@ public class AuthTokenProvider {
 		
 	}
 
+	private static Map<Roles,String> tokenCache = new ConcurrentHashMap();
+
+	
 	public static String getToken(Roles role) {
+		
+		if(tokenCache.containsKey(role)) {
+			
+			return tokenCache.get(role);
+		}
 		
 		//Make req for login api and extract token 
 		//print on console
@@ -54,7 +68,7 @@ public class AuthTokenProvider {
 				.body()
 				.jsonPath().getString("data.token");
 		
-		
+		tokenCache.put(role, token);
 		return token;
 		
 		
