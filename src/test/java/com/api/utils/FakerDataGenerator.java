@@ -23,6 +23,7 @@ public class FakerDataGenerator {
 	private final static int MST_MODEL_ID=1;
 	
 	private final static Random RANDOM = new Random();
+	private final static int validProblemId[]= {1,2,3,4,5,6,7,8,9,10,11,12,15,16,17,19,20,22,24,26,27,28,29};
 	
 	private static Faker faker =  new Faker(new Locale("en-IND")); //India specific fake Data
 	
@@ -70,8 +71,8 @@ public class FakerDataGenerator {
 	//Problems Object Creation
 		
 		String remark = faker.lorem().sentence(2);
-		int id =RANDOM.nextInt(20);
-		Problems problem = new Problems(id+1, remark); 
+		int randomIndex =RANDOM.nextInt(validProblemId.length);
+		Problems problem = new Problems(validProblemId[randomIndex], remark); 
 		System.out.println(problem);
 		List<Problems> problemList = new ArrayList<Problems>();
 		
