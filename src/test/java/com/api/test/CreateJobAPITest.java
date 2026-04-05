@@ -37,7 +37,7 @@ public class CreateJobAPITest {
 		
 		 customer = new Customer("Ronak", "Test", "123456789", "", "ronak@test.com", "");
 		 customerAddress = new CustomerAddress("5 ", "John Street", "Gandhi Bag", "Inrobit", "Mumbai", "395005","India","Pune");
-		 customerProduct = new CustomerProduct(DateTimeUtil.getTimeWithDaysAgo(10), "99779059666577", "99779059666577", "99779059666577", DateTimeUtil.getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(), Model.NEXUS_2_BLUE.getCode());
+		 customerProduct = new CustomerProduct(DateTimeUtil.getTimeWithDaysAgo(10), "99779058966577", "99779058966577", "99779058966577", DateTimeUtil.getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(), Model.NEXUS_2_BLUE.getCode());
 		
 		 problems = new Problems(Problem.SMARTPHONE_IS_RUNNING_SLOW.getCode(), "Charger Issue");
 		problemsList = new ArrayList<Problems>();
@@ -56,7 +56,7 @@ public class CreateJobAPITest {
 		RestAssured
 			.given()
 				.spec(SpecUtil.requestSpecWithAuth(Roles.FD, createJobPayload))
-				.body(createJobPayload)
+				
 				.when()
 					.post("/job/create")
 				.then()
