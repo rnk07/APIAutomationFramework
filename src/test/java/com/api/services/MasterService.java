@@ -6,32 +6,25 @@ import com.api.utils.SpecUtil;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-public class DashBoardService {
+public class MasterService {
+
+	private static final String MASTE_ENDPOINT= "master";
 	
-	private static final String COUNT_ENDPOINT = "/dashboard/count";
-	
-	public Response getCount(Roles role) {
-		
-		Response response = RestAssured
+	public Response master(Roles role) {
+		Response response =RestAssured
 		.given()
 			.spec(SpecUtil.requestSpec())
 			.spec(SpecUtil.requestSpecWithAuth(role))
-			
 		.when()
-			.get(COUNT_ENDPOINT);
-		
+			.post(MASTE_ENDPOINT);
 		return response;
 	}
-	
-public Response getCountwithNoAuth() {
-		
-		Response response = RestAssured
+	public Response masterWithNoAuth() {
+		Response response =RestAssured
 		.given()
 			.spec(SpecUtil.requestSpec())
 		.when()
-			.get(COUNT_ENDPOINT);
-		
+			.post(MASTE_ENDPOINT);
 		return response;
 	}
-
 }
