@@ -59,7 +59,7 @@ public class FakerDemo2 {
 		String remark = faker.lorem().sentence(5);
 		Random random = new Random();
 		int id =random.nextInt(25);
-		Problems problem = new Problems(id+1, landmarkName); 
+		Problems problem = new Problems(id+1, remark); 
 		System.out.println(problem);
 	
 		List<Problems> problemList = new ArrayList<Problems>();
