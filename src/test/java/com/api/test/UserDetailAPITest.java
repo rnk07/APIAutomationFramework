@@ -1,28 +1,29 @@
 package com.api.test;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.api.constant.Roles;
+import com.api.services.UserService;
 import com.api.utils.SpecUtil;
 
-import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class UserDetailAPITest {
+	private UserService userService;
 
+	
+	@BeforeMethod(description = "Initilizing User Service.")
+	public void setUp() {
+
+		userService = new UserService();
+	}
+	
 	@Test(description = "Verify if User Detail API is working fine.",groups = {"somke","sanity","apiRegression"})
-	public void userDetailAPITest() {
+	 public void userDetailAPITest() {
 		
 		
-		RestAssured
-		.given()
-			.spec(SpecUtil.requestSpec())
-			.and()
-			.spec(SpecUtil.requestSpecWithAuth(Roles.FD))
-			.and()
-			
-		.when()
-			.get("userdetails")
+		userService.getDetail(Roles.FD)
 		.then()
 			.spec(SpecUtil.responseSpec_OK())
 			.and()

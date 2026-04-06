@@ -1,26 +1,23 @@
 package com.api.test.datadriven;
 
-import java.io.IOException;
-
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.api.request.model.UserCredentials;
-import com.api.utils.ConfigManager2;
+import com.api.services.AuthService;
 import com.api.utils.SpecUtil;
 import com.dataProviders.api.bean.UserBean;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class LoginAPIDataDrivenTest {
-	
+	private  AuthService authService;
 
-	
-	
+	@BeforeMethod(description = "Initilizing The Auth Service")
+	public void setup() {
+		authService = new AuthService();
+
+	}
 	
 	
 	@Test(description = "Verifying if login API is working for iamfd user",
@@ -31,11 +28,8 @@ public class LoginAPIDataDrivenTest {
 		
 
 		
-		RestAssured
-			.given()
-				.spec(SpecUtil.requestSpec(userbean))
-			.when()
-				.post("login")
+		
+		authService.login(userbean)
 			.then()
 				.spec(SpecUtil.responseSpec_OK())
 				.body("message", Matchers.matchesPattern("Success"))

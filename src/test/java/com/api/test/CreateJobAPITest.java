@@ -18,6 +18,7 @@ import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
+import com.api.services.JobService;
 import com.api.utils.DateTimeUtil;
 import com.api.utils.SpecUtil;
 import io.restassured.RestAssured;
@@ -32,12 +33,14 @@ public class CreateJobAPITest {
 	private List<Problems>  problemsList;
 	private CreateJobPOJO createJobPayload;
 	
-	@BeforeMethod
+	private JobService jobService;
+	
+	@BeforeMethod(description = "Creating Job api request payload initilizing job service.")
 	public void setUp() {
 		
 		 customer = new Customer("Ronak", "Test", "123456789", "", "ronak@test.com", "");
 		 customerAddress = new CustomerAddress("5 ", "John Street", "Gandhi Bag", "Inrobit", "Mumbai", "395005","India","Pune");
-		 customerProduct = new CustomerProduct(DateTimeUtil.getTimeWithDaysAgo(10), "99779058966577", "99779058966577", "99779058966577", DateTimeUtil.getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(), Model.NEXUS_2_BLUE.getCode());
+		 customerProduct = new CustomerProduct(DateTimeUtil.getTimeWithDaysAgo(10), "99019058966577", "99019058966577", "99019058966577", DateTimeUtil.getTimeWithDaysAgo(10), Product.NEXUS_2.getCode(), Model.NEXUS_2_BLUE.getCode());
 		
 		 problems = new Problems(Problem.SMARTPHONE_IS_RUNNING_SLOW.getCode(), "Charger Issue");
 		problemsList = new ArrayList<Problems>();
@@ -45,7 +48,7 @@ public class CreateJobAPITest {
 		
 		 createJobPayload = new CreateJobPOJO(Service_Location.SERVICE_LOCATION_A.getCode(), Platform_Id.FRONT_DESK.getCode(), Warranty_Status.IN_WARRANTY.getCode(), OEM.GOOGLE.getCode(), customer, customerAddress, customerProduct, problemsList);
 		
-		
+		  jobService = new JobService();
 	}
 
 	@Test(description = "Verify if Create Inwarranty Job API is working fine.",groups = {"somke","sanity","apiRegression"})
@@ -53,12 +56,9 @@ public class CreateJobAPITest {
 		
 		//Creating CreateJobPOJO object
 		
-		RestAssured
-			.given()
-				.spec(SpecUtil.requestSpecWithAuth(Roles.FD, createJobPayload))
-				
-				.when()
-					.post("/job/create")
+		
+		jobService.createJob(Roles.FD, createJobPayload)
+		
 				.then()
 				.spec(SpecUtil.responseSpec_OK())
 				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("responseSchema/createJobResponseSchema.json"))

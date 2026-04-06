@@ -1,28 +1,32 @@
 package com.api.test;
 
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.api.constant.Roles;
-import com.api.utils.AuthTokenProvider;
-import com.api.utils.ConfigManager2;
+import com.api.services.DashBoardService;
 import com.api.utils.SpecUtil;
 
-import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class CountAPITest {
-
+	private DashBoardService  dashboardService; 
+	
+	
+	@BeforeMethod(description = "Initilizing Dashboard Service")
+	public void setUp() {
+		
+		  dashboardService = new DashBoardService();
+	}
+	
+	
 	@Test(description = "Verify if Count Job API is working fine.",groups = {"somke","sanity","apiRegression"})
 	public void verfyCountAPIResonse() {
 		
-		RestAssured
-			.given()
-				.spec(SpecUtil.requestSpec())
-				.spec(SpecUtil.requestSpecWithAuth(Roles.FD))
-				
-			.when()
-				.get("/dashboard/count")
+		
+		
+		dashboardService.getCount(Roles.FD)
 			.then()
 				.spec(SpecUtil.responseSpec_OK())
 				.body("message", Matchers.matchesPattern("Success"))
@@ -37,11 +41,7 @@ public class CountAPITest {
 	
 	@Test(description = "Verify if Create Job API is givine 401 error for invalid token.",groups = {"somke","apiNegative","apiRegression"})
 	public void countAPITest_MissingAuthToken() {
-		RestAssured
-		.given()
-			.spec(SpecUtil.requestSpec())
-		.when()
-			.get("/dashboard/count")
+		dashboardService.getCountwithNoAuth()
 		.then()
 			.spec(SpecUtil.responseSpec_TEXT(401));
 			
