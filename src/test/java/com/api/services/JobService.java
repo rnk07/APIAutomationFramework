@@ -10,6 +10,7 @@ import io.restassured.response.Response;
 public class JobService {
 
 	private static final String CREATE_JOB_ENDPOINT="/job/create";
+	private static final String JOB_SEARCH_ENDPOINT="/job/search";
 	
 	public Response createJob(Roles role, CreateJobPOJO createJobPayload) {
 		
@@ -24,5 +25,18 @@ public class JobService {
 		return response;
 	}
 	
+	
+public Response searchJob(Roles role, Object createJobPayload) {
+		
+		
+		Response response =RestAssured
+		.given()
+			.spec(SpecUtil.requestSpecWithAuth(Roles.FD, createJobPayload))
+			
+			.when()
+				.post(JOB_SEARCH_ENDPOINT);
+		
+		return response;
+	}
 	
 }

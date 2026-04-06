@@ -9,6 +9,7 @@ import io.restassured.response.Response;
 public class DashBoardService {
 	
 	private static final String COUNT_ENDPOINT = "/dashboard/count";
+	private static final String DETAIL_ENDPOINT = "/dashboard/details";
 	
 	public Response getCount(Roles role) {
 		
@@ -33,5 +34,18 @@ public Response getCountwithNoAuth() {
 		
 		return response;
 	}
+
+public Response details(Roles role, Object payload) {
+	Response response = RestAssured
+			.given()
+				.spec(SpecUtil.requestSpecWithAuth(role))
+				.body(payload)
+			.when()
+				.post(DETAIL_ENDPOINT);
+			
+			return response;
+}
+
+
 
 }
