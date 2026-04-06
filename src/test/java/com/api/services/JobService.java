@@ -1,11 +1,15 @@
 package com.api.services;
 
+import java.util.Iterator;
+
 import com.api.constant.Roles;
 import com.api.request.model.CreateJobPOJO;
 import com.api.utils.SpecUtil;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import io.restassured.response.Validatable;
+import io.restassured.response.ValidatableResponse;
 
 public class JobService {
 
@@ -26,6 +30,8 @@ public class JobService {
 	}
 	
 	
+
+	
 public Response searchJob(Roles role, Object createJobPayload) {
 		
 		
@@ -38,5 +44,8 @@ public Response searchJob(Roles role, Object createJobPayload) {
 		
 		return response;
 	}
+
+
+
 	
 }
