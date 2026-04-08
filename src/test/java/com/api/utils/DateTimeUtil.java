@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit;
 public class DateTimeUtil {
 
 	private DateTimeUtil(){
-		
+		 
 	}
 	
 	public static String getTimeWithDaysAgo(int days) {

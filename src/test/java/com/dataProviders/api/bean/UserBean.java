@@ -8,7 +8,7 @@ public class UserBean {
 		super();
 		this.username = username;
 		this.password = password;
-	}
+	} 
 	
 	public UserBean() {
 		

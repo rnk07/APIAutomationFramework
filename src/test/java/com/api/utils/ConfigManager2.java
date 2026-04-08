@@ -12,8 +12,8 @@ public class ConfigManager2 {
 
 	private static Properties prop = new Properties();
 	private static String path ;
-	private static String env;
-
+	public  static String env;
+ 
 	private ConfigManager2() {
 		// private constructor- we cant create object outside of this class.
 		// made this more robust- no one can create object outside of this class

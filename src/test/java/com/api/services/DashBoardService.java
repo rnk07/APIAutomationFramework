@@ -9,7 +9,7 @@ import com.api.utils.SpecUtil;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-public class DashBoardService {
+public class DashBoardService { 
 	
 	private static final String COUNT_ENDPOINT = "/dashboard/count";
 	private static final String DETAIL_ENDPOINT = "/dashboard/details";

@@ -18,7 +18,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 @Listeners(com.listeners.APITestListener.class)
 public class CreateJobAPITestDataDrienFakerData {
 	
-	
+	 
 	private CreateJobPOJO createJobPayload;
 	private JobService jobService;
 	

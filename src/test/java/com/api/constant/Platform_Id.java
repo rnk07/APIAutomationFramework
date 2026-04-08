@@ -4,7 +4,7 @@ public enum Platform_Id {
 
 	FST(3),
 	FRONT_DESK(2);
-	
+	 
 	
 int code;
 	
