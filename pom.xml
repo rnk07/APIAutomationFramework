@@ -86,8 +86,13 @@
 			<version>2.33.0</version>
 			<scope>compile</scope>
 		</dependency>
-		
-		
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.9.25.1</version>
+			<scope>runtime</scope>
+		</dependency>
 		
 	</dependencies>
 
@@ -113,6 +118,12 @@
 					<allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
 					
 					</systemPropertyVariables>
+					
+					<argLine>
+					-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.25.1/aspectjweaver-1.9.25.1.jar"
+					</argLine>
+					
+					
 				</configuration>
 			</plugin>
 

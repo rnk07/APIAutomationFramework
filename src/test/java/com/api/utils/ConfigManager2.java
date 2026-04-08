@@ -1,11 +1,10 @@
 package com.api.utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+
+import io.qameta.allure.Step;
 
 public class ConfigManager2 {
 //	Program to read from config.properties
@@ -66,6 +65,7 @@ public class ConfigManager2 {
 		}
 	}
 
+	@Step("Getting property value from Config file.")
 	public static String getProperty(String key) {
 
 		return prop.getProperty(key);

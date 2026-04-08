@@ -10,6 +10,8 @@ import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
+import io.qameta.allure.Step;
+
 public class CSVReaderUtil {
 
 	// Constructor is private
@@ -20,6 +22,7 @@ public class CSVReaderUtil {
 		// private- no once can create object out side of this class
 	}
 
+	@Step("Loading Data From CSV File")
 	public static Iterator<UserBean> loadCsv(String pathOfCSVFile) {
 		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("testData/loginCreds.csv");
 

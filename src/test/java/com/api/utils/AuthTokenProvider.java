@@ -1,16 +1,14 @@
 package com.api.utils;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import javax.management.relation.Role;
 
 import org.hamcrest.Matchers;
 
 import com.api.constant.Roles;
 import com.api.request.model.UserCredentials;
 
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
@@ -22,7 +20,7 @@ public class AuthTokenProvider {
 
 	private static Map<Roles,String> tokenCache = new ConcurrentHashMap();
 
-	
+	@Step("Getting Auth Token For The Role.")
 	public static String getToken(Roles role) {
 		
 		if(tokenCache.containsKey(role)) {
