@@ -40,9 +40,11 @@ public class LoginAPITest {
 				.body("message", Matchers.matchesPattern("Success"))
 				.and()
 				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("responseSchema/loginAPIResponseSchema.json"));
-	
-		
+
 	}
+	
+	
+	
 	
 	
 

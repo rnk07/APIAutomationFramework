@@ -19,8 +19,8 @@ public class UserService {
 		LOGGER.info("Making get detail to {} with role {}",USERDETAILS_ENDPOINT,role);	
 		Response response = RestAssured
 		.given()
-			.spec(SpecUtil.requestSpec())
-			.and()
+//			.spec(SpecUtil.requestSpec())
+//			.and()
 			.spec(SpecUtil.requestSpecWithAuth(role))
 			.and()
 			

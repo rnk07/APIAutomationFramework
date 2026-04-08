@@ -1,6 +1,7 @@
 package com.api.test.datadriven;
 
 import org.hamcrest.Matchers;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.constant.Roles;
@@ -10,6 +11,7 @@ import com.api.utils.SpecUtil;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
+@Listeners(com.listeners.APITestListener.class)
 public class CreateJobAPITestFakerDataWithNRecords {
 
 	
