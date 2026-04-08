@@ -20,7 +20,6 @@ public class MasterService {
 		LOGGER.info("Making master request to {} with role {}.",MASTE_ENDPOINT,role);
 		Response response =RestAssured
 		.given()
-			.spec(SpecUtil.requestSpec())
 			.spec(SpecUtil.requestSpecWithAuth(role))
 		.when()
 			.post(MASTE_ENDPOINT);

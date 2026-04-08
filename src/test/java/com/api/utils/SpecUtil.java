@@ -23,10 +23,11 @@ public class SpecUtil {
 		RequestSpecification requestSpecification = new RequestSpecBuilder()
 				.setBaseUri(ConfigManager2.getProperty("BASE_URI"))
 				.setContentType(ContentType.JSON).setAccept(ContentType.JSON)
-				.log(LogDetail.URI)
-				.log(LogDetail.METHOD)
-				.log(LogDetail.HEADERS)
-				.log(LogDetail.BODY)
+//				.log(LogDetail.URI)
+//				.log(LogDetail.METHOD)
+//				.log(LogDetail.HEADERS)
+//				.log(LogDetail.BODY)
+				.addFilter(new SensitiveDataFilter())
 				.build();
 
 		return requestSpecification;
@@ -42,10 +43,6 @@ public class SpecUtil {
 				.setContentType(ContentType.JSON).setAccept(ContentType.JSON)
 				.setBody(userCreds)
 				.addFilter(new SensitiveDataFilter())
-				.log(LogDetail.URI)
-				.log(LogDetail.METHOD)
-				.log(LogDetail.HEADERS)
-//				.log(LogDetail.BODY)
 				.build();
 
 		return requestSpecification;
@@ -59,10 +56,7 @@ public class SpecUtil {
 				.setBaseUri(ConfigManager2.getProperty("BASE_URI"))
 				.setContentType(ContentType.JSON).setAccept(ContentType.JSON)
 				.addHeader("Authorization", AuthTokenProvider.getToken(role))
-				.log(LogDetail.URI)
-				.log(LogDetail.METHOD)
-				.log(LogDetail.HEADERS)
-				.log(LogDetail.BODY)
+				.addFilter(new SensitiveDataFilter())
 				.build();
 
 		return requestSpecification;
@@ -77,10 +71,7 @@ public static RequestSpecification requestSpecWithAuth(Roles role, Object payloa
 				.setContentType(ContentType.JSON).setAccept(ContentType.JSON)
 				.addHeader("Authorization", AuthTokenProvider.getToken(role))
 				.setBody(payload)
-				.log(LogDetail.URI)
-				.log(LogDetail.METHOD)
-				.log(LogDetail.HEADERS)
-				.log(LogDetail.BODY)
+				.addFilter(new SensitiveDataFilter())
 				.build();
 
 		return requestSpecification;
@@ -112,7 +103,6 @@ public static ResponseSpecification responseSpec_JSON(int statusCode) {
 			.expectContentType(ContentType.JSON)
 			.expectStatusCode(statusCode)
 			.expectResponseTime(Matchers.lessThan(5000L))
-			.log(LogDetail.ALL)
 			.build();
 		return responseSpecification;
 		
@@ -125,7 +115,6 @@ public static ResponseSpecification responseSpec_TEXT(int statusCode) {
 		
 		.expectStatusCode(statusCode)
 		.expectResponseTime(Matchers.lessThan(5000L))
-		.log(LogDetail.ALL)
 		.build();
 	return responseSpecification;
 	
