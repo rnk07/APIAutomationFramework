@@ -1,19 +1,18 @@
 package com.api.utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+
+import io.qameta.allure.Step;
 
 public class ConfigManager2 {
 //	Program to read from config.properties
 
 	private static Properties prop = new Properties();
 	private static String path ;
-	private static String env;
-
+	public  static String env;
+ 
 	private ConfigManager2() {
 		// private constructor- we cant create object outside of this class.
 		// made this more robust- no one can create object outside of this class
@@ -66,6 +65,7 @@ public class ConfigManager2 {
 		}
 	}
 
+	@Step("Getting property value from Config file.")
 	public static String getProperty(String key) {
 
 		return prop.getProperty(key);

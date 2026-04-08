@@ -6,7 +6,7 @@ public enum Product {
 	int code;
 	private Product(int code) {
 		this.code = code;
-	}
+	} 
 	
 	
 	public int getCode() {

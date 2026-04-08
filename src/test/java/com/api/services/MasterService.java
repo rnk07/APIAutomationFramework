@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import com.api.constant.Roles;
 import com.api.utils.SpecUtil;
 
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
@@ -14,7 +15,7 @@ public class MasterService {
 	private static final String MASTE_ENDPOINT= "master";
 	private static final Logger LOGGER = LogManager.getLogger(MasterService.class);
 	
-	
+	@Step("Making Master API Request.")
 	public Response master(Roles role) {
 	
 		LOGGER.info("Making master request to {} with role {}.",MASTE_ENDPOINT,role);
@@ -25,6 +26,8 @@ public class MasterService {
 			.post(MASTE_ENDPOINT);
 		return response;
 	}
+	
+	@Step("Making User Detail API Request")
 	public Response masterWithNoAuth() {
 		
 		LOGGER.info("Making master request to {} with no auth.",MASTE_ENDPOINT);

@@ -4,11 +4,11 @@ import org.hamcrest.Matchers;
 
 import com.api.constant.Roles;
 import com.api.filters.SensitiveDataFilter;
-import com.api.request.model.UserCredentials;
 
+import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
-import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
@@ -17,6 +17,7 @@ public class SpecUtil {
 	// static method
 
 	//GET-DELETE - Method- No Parameter
+	@Step("Setting BasueURI, ContentType as Application/Json and attaching the senstive data filter. ")
 	public static RequestSpecification requestSpec() {
 		// To take care of common request sections(methods)
 
@@ -28,6 +29,7 @@ public class SpecUtil {
 //				.log(LogDetail.HEADERS)
 //				.log(LogDetail.BODY)
 				.addFilter(new SensitiveDataFilter())
+				.addFilter(new AllureRestAssured())
 				.build();
 
 		return requestSpecification;
@@ -35,6 +37,7 @@ public class SpecUtil {
 	}
 	
 	//POST-PUT-PATCH -takes body
+	@Step("Setting BasueURI, ContentType as Application/Json and attaching the senstive data filter. ")
 	public static RequestSpecification requestSpec(Object userCreds) {
 		// To take care of common request sections(methods)
 
@@ -43,6 +46,7 @@ public class SpecUtil {
 				.setContentType(ContentType.JSON).setAccept(ContentType.JSON)
 				.setBody(userCreds)
 				.addFilter(new SensitiveDataFilter())
+				.addFilter(new AllureRestAssured())
 				.build();
 
 		return requestSpecification;
@@ -50,6 +54,7 @@ public class SpecUtil {
 	}
 	
 	// POST with Auth Token
+	@Step("Setting BasueURI, ContentType as Application/Json and attaching the senstive data filter for a role")
 	public static RequestSpecification requestSpecWithAuth(Roles role) {
 		
 		RequestSpecification requestSpecification = new RequestSpecBuilder()
@@ -57,6 +62,7 @@ public class SpecUtil {
 				.setContentType(ContentType.JSON).setAccept(ContentType.JSON)
 				.addHeader("Authorization", AuthTokenProvider.getToken(role))
 				.addFilter(new SensitiveDataFilter())
+				.addFilter(new AllureRestAssured())
 				.build();
 
 		return requestSpecification;
@@ -64,6 +70,7 @@ public class SpecUtil {
 		
 	}
 	
+	@Step("Setting BasueURI, ContentType as Application/Json and attaching the senstive data filter and attaching payload")	
 public static RequestSpecification requestSpecWithAuth(Roles role, Object payload) {
 		
 		RequestSpecification requestSpecification = new RequestSpecBuilder()
@@ -72,6 +79,7 @@ public static RequestSpecification requestSpecWithAuth(Roles role, Object payloa
 				.addHeader("Authorization", AuthTokenProvider.getToken(role))
 				.setBody(payload)
 				.addFilter(new SensitiveDataFilter())
+				.addFilter(new AllureRestAssured())
 				.build();
 
 		return requestSpecification;
@@ -82,7 +90,7 @@ public static RequestSpecification requestSpecWithAuth(Roles role, Object payloa
 	
 	
 	//Response Specification
-	
+	@Step("Validating Status code, response time and content type.")
 	public static ResponseSpecification responseSpec_OK() {
 		
 		ResponseSpecification responseSpecification= new ResponseSpecBuilder()
@@ -96,7 +104,7 @@ public static RequestSpecification requestSpecWithAuth(Roles role, Object payloa
 		
 	}
 	
-	
+	@Step("Validating Status code, response time and content type.")
 public static ResponseSpecification responseSpec_JSON(int statusCode) {
 		
 		ResponseSpecification responseSpecification= new ResponseSpecBuilder()
@@ -109,6 +117,7 @@ public static ResponseSpecification responseSpec_JSON(int statusCode) {
 		
 	}
 	
+	@Step("Validating Status code, response time and content type.")
 public static ResponseSpecification responseSpec_TEXT(int statusCode) {
 	
 	ResponseSpecification responseSpecification= new ResponseSpecBuilder()

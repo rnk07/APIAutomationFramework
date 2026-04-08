@@ -11,5 +11,5 @@ NEXUS_2_BLUE(1), GALAXY(2);
 	public int getCode() {
 		return code;
 	}
-	
+	 
 }

@@ -13,6 +13,8 @@ import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
 import com.github.javafaker.Faker;
 
+import io.qameta.allure.Step;
+
 public class FakerDataGenerator {
 	private final static String COUNTRY = "India";
 	private final static int MST_SERVICE_LOCATION_ID=0;
@@ -32,7 +34,7 @@ public class FakerDataGenerator {
 		
 	}
 	
-	
+	@Step("Generating Fake Create job Data")
 	public static CreateJobPOJO generateFakeCreateJobData() {
 		
 		Customer customer  = generateFakeCustomerData();
@@ -46,6 +48,7 @@ public class FakerDataGenerator {
 		
 	}
 	
+	@Step("Generating Multiple Fake Create job Data")
 	public static Iterator<CreateJobPOJO> generateFakeCreateJobData(int count) {
 
 		List<CreateJobPOJO> payloadList = new ArrayList<CreateJobPOJO>();
@@ -66,7 +69,7 @@ public class FakerDataGenerator {
 	}
 	
 	
-
+	@Step("Generating Fake Problems List For Create Job Payload")
 	private static List<Problems> generateCustomerFakeProblemData() {
 	//Problems Object Creation
 		
@@ -88,6 +91,7 @@ public class FakerDataGenerator {
 		return problemList;
 	}
 
+	@Step("Generating Fake Customer Product Info")
 	private static CustomerProduct generateCustomerProduct() {
 		//Customer Product Object Creation
 
@@ -101,7 +105,7 @@ public class FakerDataGenerator {
 				System.out.println(customerProduct);
 		return customerProduct;
 	}
-
+	@Step("Generating Fake Customer  Data")
 	private static CustomerAddress generateCustomerAddress() {
 		//Customer Address Object Creation
 		String flatNumber = faker.address().buildingNumber();
@@ -118,6 +122,7 @@ public class FakerDataGenerator {
 		return customerAddress;
 	}
 
+	@Step("Generating Fake Customer Data")
 	private static Customer generateFakeCustomerData() {
 		String firstName =faker.name().firstName();
 		String lastName =faker.name().lastName();
