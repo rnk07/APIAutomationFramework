@@ -4,7 +4,7 @@
 	
 		<Console name="CONSOLE" target="SYSTEM_OUT">
 		
-			<PatternLayout pattern= "%d [%t] %highlight{%5p} %c::%M():%L - %m%n"/>
+			<PatternLayout pattern= "%d{DD-MM-YYYY HH:mm:SS} [%t] %highlight{%5p} %c{1}::%M():%L - %m%n"/>
 			
 			
 		

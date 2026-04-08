@@ -3,6 +3,7 @@ package com.api.utils;
 import org.hamcrest.Matchers;
 
 import com.api.constant.Roles;
+import com.api.filters.SensitiveDataFilter;
 import com.api.request.model.UserCredentials;
 
 import io.restassured.builder.RequestSpecBuilder;
@@ -40,10 +41,11 @@ public class SpecUtil {
 				.setBaseUri(ConfigManager2.getProperty("BASE_URI"))
 				.setContentType(ContentType.JSON).setAccept(ContentType.JSON)
 				.setBody(userCreds)
+				.addFilter(new SensitiveDataFilter())
 				.log(LogDetail.URI)
 				.log(LogDetail.METHOD)
 				.log(LogDetail.HEADERS)
-				.log(LogDetail.BODY)
+//				.log(LogDetail.BODY)
 				.build();
 
 		return requestSpecification;
@@ -96,7 +98,7 @@ public static RequestSpecification requestSpecWithAuth(Roles role, Object payloa
 			.expectContentType(ContentType.JSON)
 			.expectStatusCode(200)
 			.expectResponseTime(Matchers.lessThan(5000L))
-			.log(LogDetail.ALL)
+//			.log(LogDetail.ALL)
 			.build();
 		return responseSpecification;
 		
