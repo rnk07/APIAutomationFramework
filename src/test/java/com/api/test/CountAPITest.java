@@ -9,9 +9,16 @@ import com.api.constant.Roles;
 import com.api.services.DashBoardService;
 import com.api.utils.SpecUtil;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
-
+@Epic("Job Management")
+@Feature("Job Count Feature")
 @Listeners(com.listeners.APITestListener.class)
 public class CountAPITest {
 	private DashBoardService  dashboardService; 
@@ -24,6 +31,9 @@ public class CountAPITest {
 	}
 	
 	
+	@Story("Count Job should be display valid Job number.")
+	@Description("Verify if Count api shows valid number")
+	@Severity(SeverityLevel.CRITICAL)
 	@Test(description = "Verify if Count Job API is working fine.",groups = {"somke","sanity","apiRegression"})
 	public void verfyCountAPIResonse() {
 		

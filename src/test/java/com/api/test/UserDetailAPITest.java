@@ -8,9 +8,17 @@ import com.api.constant.Roles;
 import com.api.services.UserService;
 import com.api.utils.SpecUtil;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 @Listeners(com.listeners.APITestListener.class)
+@Epic("User Management")
+@Feature("Getting User Details")
 public class UserDetailAPITest {
 	private UserService userService;
 
@@ -21,6 +29,9 @@ public class UserDetailAPITest {
 		userService = new UserService();
 	}
 	
+	@Story("User Details Should be Displayed")
+	@Description("Verify if user details displayed via api")
+	@Severity(SeverityLevel.CRITICAL)
 	@Test(description = "Verify if User Detail API is working fine.",groups = {"somke","sanity","apiRegression"})
 	 public void userDetailAPITest() {
 		
